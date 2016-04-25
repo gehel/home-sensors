@@ -1,10 +1,13 @@
 #include <Arduino.h>
 #include <Ethernet.h>
-#include <RF24Network.h>
 #include <RF24.h>
+#include <RF24Network.h>
+#include <RF24Mesh.h>
 #include <printf.h>
+#include <DHT.h>
 #include <SPI.h>
-#include <Statsd/Statsd.h>
+#include <Statsd.h>
+#include <Sensor.h>
 
 
 IPAddress statsd_ip(192, 168, 1, 40); // IP Address of StatsD Server
@@ -16,15 +19,17 @@ Statsd statsd(statsd_ip, statsd_port);
 
 RF24 radio(7, 8);
 RF24Network network(radio);
+RF24Mesh mesh(radio, network);
+
+Sensor sensor(mesh);
 
 const uint16_t this_node = 00;    // Address of our node in Octal format ( 04,031, etc)
 const uint16_t other_node = 01;   // Address of the other node in Octal format
 
-struct payload_t {                 // Structure of our payload
-    unsigned long ms;
-    unsigned long counter;
-};
+#define DHT_PIN 2
+#define DHT_TYPE DHT22
 
+DHT dht(DHT_PIN, DHT_TYPE);
 
 void setup() {
     Serial.begin(57600);
@@ -45,16 +50,19 @@ void setup() {
     SPI.begin();
     Serial.println("Start radio");
     radio.begin();
-    Serial.println("Nework start");
-    network.begin(/*channel*/ 90, /*node address*/ this_node);
     Serial.println("Radio details");
     radio.printDetails();
+    Serial.println("Nework start");
+    network.begin(/*channel*/ 90, /*node address*/ this_node);
+    mesh.setNodeID(0);
+    mesh.begin();
+    dht.begin();
 }
 
 void loop() {
     Serial.print(".");
     Ethernet.maintain();
-    network.update();
+    sensor.collect();
     statsd.gauge("arduino.collector.uptimeInSeconds", millis() / 1000);
     while ( network.available() ) {     // Is there anything ready for us?
         RF24NetworkHeader header;        // If so, grab it and print it out
