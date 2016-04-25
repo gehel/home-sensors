@@ -1,0 +1,12 @@
+[submodule "RF24Network"]
+	path = RF24Network
+	url = git@github.com:TMRh20/RF24Network.git
+[submodule "RF24"]
+	path = RF24
+	url = git@github.com:TMRh20/RF24.git
+[submodule "RF24Mesh"]
+	path = RF24Mesh
+	url = git@github.com:TMRh20/RF24Mesh.git
+[submodule "DHT"]
+	path = DHT
+	url = git@github.com:adafruit/DHT-sensor-library.git
