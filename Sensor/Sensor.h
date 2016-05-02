@@ -8,14 +8,13 @@
 #include <RF24Mesh.h>
 
 struct payload_t {                 // Structure of our payload
-    unsigned long ms;
-    unsigned long counter;
+    unsigned long temperature;
+    unsigned long humidity;
 };
 
 class Sensor {
 public:
     Sensor(RF24Mesh& mesh);
-    void collect();
 
 private:
     RF24Mesh& mesh;
