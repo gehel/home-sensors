@@ -5,8 +5,7 @@
 #ifndef COLLECTOR_STATSD_H
 #define COLLECTOR_STATSD_H
 
-#include <Arduino.h>
-#include <IPAddress.h>
+#include <UIPEthernet.h>
 
 class Statsd  {
 public:

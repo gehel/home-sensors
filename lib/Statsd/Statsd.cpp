@@ -3,7 +3,6 @@
 //
 
 #include "Statsd.h"
-#include <EthernetUdp.h>
 
 EthernetUDP udp;
 

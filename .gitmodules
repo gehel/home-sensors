@@ -1,12 +1,18 @@
 [submodule "RF24Network"]
-	path = RF24Network
+	path = lib/RF24Network
 	url = git@github.com:TMRh20/RF24Network.git
 [submodule "RF24"]
-	path = RF24
+	path = lib/RF24
 	url = git@github.com:TMRh20/RF24.git
 [submodule "RF24Mesh"]
-	path = RF24Mesh
+	path = lib/RF24Mesh
 	url = git@github.com:TMRh20/RF24Mesh.git
 [submodule "DHT"]
-	path = DHT
+	path = lib/DHT
 	url = git@github.com:adafruit/DHT-sensor-library.git
+[submodule "arduino_uip"]
+	path = lib/UIPEthernet
+	url = git@github.com:ntruchsess/arduino_uip.git
+[submodule "arduino-cmake"]
+	path = arduino-cmake
+	url = git://github.com/queezythegreat/arduino-cmake.git
